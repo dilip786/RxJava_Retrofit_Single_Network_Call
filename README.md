@@ -5,20 +5,49 @@ This is simpler version of an Observable. Singles work almost exactly the same a
 Code Setup
 
 ```
+
+Make sure you require Internet permission in your manifest file.
+
+<uses-permission android:name="android.permission.INTERNET" />
+
+We need following dependencies for this project. Add the lines below to your app/build.gradle in your app project under dependencies.
+
+def rxjava_version ="2.1.8"
+def rxandroid_version = "2.0.1"
+def retrofit_version ="2.0.2"
+def gson_version ="2.6.2"
+def retrofit_adapter ="1.0.0"
+
+dependencies 
+{
+	// Retrofit, Gson
+	implementation "com.google.code.gson:gson:$gson_version"
+	implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+	implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+	implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofit_adapter"
+
+	// RxJava2
+	implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+	implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+}
+
+```
+
+```
 val apiService = ApiClient.client!!.create(ApiInterface::class.java)
 
         apiService.getWeatherReport(apiKey, "$latitude,$longitude").subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<WeatherResponseDO> {
                 override fun onSuccess(t: WeatherResponseDO) {
-                    view.onSuccess(countryName, t)
+                    // Success case
                 }
 
                 override fun onSubscribe(d: Disposable) {
                 }
 
                 override fun onError(e: Throwable) {
-                    view.onFailure(e.message)
+                    // Failure case
                 }
             })
 ```
