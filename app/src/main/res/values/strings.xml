@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RxJava_Retrofit_Single_Network_Call</string>
+    <string name="type">cafe</string>
+    <string name="radius">5000</string>
+    <string name="key">AIzaSyBywqwSJG4uC2btZZQrkJiDVzH73g_PVoU</string>
+    <string name="latitude">25.0805</string>
+    <string name="longitude">55.1403</string>
+</resources>
